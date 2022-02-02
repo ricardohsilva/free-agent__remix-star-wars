@@ -1,0 +1,17 @@
+.cover {
+    position: relative;
+    height: 60vh;
+    width: 100vw;
+    max-height: 500px;
+}
+
+.cover--title {
+    position: absolute;
+    top: 30%;
+}
+
+.cover--image {
+    max-height: inherit;
+    height: inherit;
+    background-repeat: no-repeat;
+}
