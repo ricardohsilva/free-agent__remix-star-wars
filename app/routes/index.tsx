@@ -1,14 +1,14 @@
-import { LoaderFunction, useLoaderData, useSubmit, useTransition } from "remix";
+import { json, LoaderFunction, useLoaderData, useSubmit, useTransition } from "remix";
 
 import Cover from "~/shared/components/cover";
 import ProductList from "~/shared/components/product-list";
-
-import coverGif from '~/assets/images/darth-vader-cover.gif';
-import { db } from "~/shared/services/db.server";
-import homeStyles from "~/assets/css/home.css";
-import { IToy } from "~/shared/interfaces/toy.interface";
 import Loading from "~/shared/components/loading";
 import Select from "~/shared/components/select";
+import { IToy } from "~/shared/interfaces/toy.interface";
+import { db } from "~/shared/services/db.server";
+
+import homeStyles from "~/assets/css/home.css";
+import coverGif from '~/assets/images/darth-vader-cover.gif';
 
 /* 
   Data Interface 
@@ -36,6 +36,8 @@ export function links() {
 export const loader: LoaderFunction = async ({ request }) => {
   let url = new URL(request.url);
   const sortDirection = url.searchParams.get('sortDirection');
+
+  /* Making the response slowly with Timeout */
   const data = await new Promise(async (resolve) => {
     setTimeout(async () => {
       const data = {
@@ -51,18 +53,16 @@ export const loader: LoaderFunction = async ({ request }) => {
       resolve(data)
     }, 2000)
   })
-
-  return data;
+  return json(data);
 }
 
 /* 
   Component 
 */
-export default function Index() {
+export default function Home() {
   const data = useLoaderData<IData>();
   const submit = useSubmit();
   const transition = useTransition();
-
   const onSortDirectionSelect = (value: string) => {
     submit({ sortDirection: value }, { replace: true });
   }
@@ -87,7 +87,7 @@ export default function Index() {
               options={[{ name: 'Price (Low to High)', value: 'asc' }, { name: 'Price (High to Low)', value: 'desc' }]}
             />
           </div>
-          <ProductList products={data.toys} />
+          <ProductList toys={data.toys} />
         </div>
       </div>
     </>

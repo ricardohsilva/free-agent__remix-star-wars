@@ -2,18 +2,16 @@ import { IToy } from "~/shared/interfaces/toy.interface";
 import ProductCard from "./product-card";
 
 interface IProps {
-    products: IToy[],
+    toys: IToy[],
 }
 
-export default function ProductList({ products }: IProps) {
+export default function ProductList({ toys }: IProps) {    
     return (
         <div className="product-list">
-            {products.map(product =>
+            {toys.map(toy =>
                 <ProductCard
-                    key={product.id}
-                    images={product.images}
-                    name={product.name}
-                    price={product.price}
+                    key={toy.id}
+                    toy={toy}
                 />)}
         </div>
     )

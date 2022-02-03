@@ -12,7 +12,6 @@ import {
 
 import Cover from "./shared/components/cover";
 
-
 import Toolbar from "./shared/components/toolbar";
 import globalStyles from "~/assets/css/global.css";
 import toolbarStyles from "~/assets/css/toolbar.css";
@@ -74,8 +73,8 @@ function Document({ children }: any) {
 export function Layout({ children }: any) {
   return (
     <>
-      <Toolbar />
-      {children}
+        <Toolbar />
+        {children}
     </>
   )
 }
@@ -97,7 +96,7 @@ export function ErrorBoundary({ error }: any) {
           backgroundColor="#f1f1f1"
         />
         <div className="responsive-container">
-          <h1>Something went</h1>
+          <h1>Something went wrong :(</h1>
           <p>{error.message}</p>
         </div>
       </Layout>

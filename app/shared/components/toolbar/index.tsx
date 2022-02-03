@@ -20,7 +20,7 @@ export default function Toolbar() {
                             </div>
                         </div>
 
-                        <div className='toolbar--relative'>
+                        <div className='toolbar--relative toolbar--list-items--hide-mobile'>
                             <NavLink
                                 to="/intent"
                                 prefetch='intent'
@@ -35,10 +35,11 @@ export default function Toolbar() {
                             <div className='toolbar--hint'>
                                 <p className='xs'><b>Link Tag as Intent</b>. prefetch="intent"</p>
                                 <p className='xs'>Fetches when Remix thinks the user intends to visit the link.</p>
+                                <p className='xs'><b>Not working when using Safari</b></p>
                             </div>
                         </div>
 
-                        <div className='toolbar--relative'>
+                        <div className='toolbar--relative toolbar--list-items--hide-mobile'>
                             <NavLink
                                 to="/render"
                                 prefetch='render'
@@ -53,10 +54,11 @@ export default function Toolbar() {
                             <div className='toolbar--hint'>
                                 <p className='xs'><b>Link Tag as Render</b>. prefetch="render"</p>
                                 <p className='xs'>Fetches when the link is rendered.</p>
+                                <p className='xs'><b>Not working when using Safari</b></p>
                             </div>
                         </div>
 
-                        <div className='toolbar--relative'>
+                        <div className='toolbar--relative toolbar--list-items--hide-mobile'>
                             <NavLink
                                 to="global-boundary"
                                 className='toolbar--list-items--link toolbar--relative'
@@ -72,10 +74,6 @@ export default function Toolbar() {
                                 <p className='xs'>Boundary from ./root.tsx will be called</p>
                             </div>
                         </div>
-
-
-
-
                     </div>
 
                     <div className="toolbar--svg-wrapper">
