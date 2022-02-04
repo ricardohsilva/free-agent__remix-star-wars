@@ -10,9 +10,13 @@ import {
   useTransition
 } from "remix";
 
-import Cover from "./shared/components/cover";
+import { store } from "./shared/store";
+import { Provider } from "react-redux";
 
+import Cover from "./shared/components/cover";
 import Toolbar from "./shared/components/toolbar";
+import Loading from "./shared/components/loading";
+
 import globalStyles from "~/assets/css/global.css";
 import toolbarStyles from "~/assets/css/toolbar.css";
 import coverStyles from "~/assets/css/cover.css";
@@ -22,11 +26,9 @@ import productListStyles from "~/assets/css/product-list.css";
 import loadingStyles from "~/assets/css/loading.css";
 import selectStyles from "~/assets/css/select.css";
 import toyDetailsStyles from "~/assets/css/toy-details.css";
-
+import breadcrumbStyles from "~/assets/css/breadcrumb.css";
+import promoStyles from "~/assets/css/promo.css";
 import error404 from "~/assets/images/error.png";
-import Loading from "./shared/components/loading";
-import { Provider } from "react-redux";
-import { store } from "./shared/store";
 
 export const meta: MetaFunction = () => {
   return { title: "Remix Star Wars Toys" };
@@ -42,6 +44,8 @@ export const links = () => [
   { rel: 'stylesheet', href: loadingStyles },
   { rel: 'stylesheet', href: selectStyles },
   { rel: 'stylesheet', href: toyDetailsStyles },
+  { rel: 'stylesheet', href: breadcrumbStyles },
+  { rel: 'stylesheet', href: promoStyles },
   { rel: 'preconnect', href: "https://fonts.googleapis.com" },
   { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100;0,700;1,400&display=swap' },
 ]

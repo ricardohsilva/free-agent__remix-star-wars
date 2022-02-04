@@ -40,7 +40,7 @@
     align-items: center;
     display: inherit;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
 }
 
 .toy-details--product-details--text {
@@ -49,7 +49,7 @@
 
 .toy-details--divider {
     height: 1px;
-    background-color: #11468f;
+    background-color: #eeeeee;
     width: 100%;
 }
 

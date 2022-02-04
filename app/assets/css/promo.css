@@ -1,0 +1,50 @@
+.promo {
+    height: 80%;
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.promo--image,
+.promo--image-crash {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: inherit;
+    width: inherit;
+    height: 100%;
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.promo--image {
+    border: solid 1px #eeeeee;
+    background-color: #eeeeee;
+}
+
+.promo--image-crash {
+    border: solid 1px #f76e11;
+    background-color: #f76e11;
+}
+
+.promo--image--text,
+.promo--image--text--crash {
+    padding: 2rem 1rem;
+    text-align: center;
+}
+.promo--image--text--crash {
+    color: white;
+}
+
+.promo--image--text {
+    color: #f76e11;
+}
+
+@media (max-width: 960px) {
+    .promo {
+        height: 400px;
+    }
+}

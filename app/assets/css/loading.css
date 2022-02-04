@@ -23,30 +23,6 @@
     align-items: center;
 }
 
-.loading--spinner-container--spinner {
-    border: 8px solid #EEEEEE;
-    border-radius: 50%;
-    border-top: 8px solid #11468f;
-    width: 40px;
-    height: 40px;
-    -webkit-animation: spinner 1.5s linear infinite; /* Safari */
-    animation: spinner 1.5s linear infinite;
-}
-
-@-webkit-keyframes spinner {
-    0% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
-}
-
-@keyframes spinner {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+.loading--spinner-container--gif{
+    height: 200px;
 }
