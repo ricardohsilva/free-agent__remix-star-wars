@@ -21,8 +21,12 @@ import buttonStyles from "~/assets/css/button.css";
 import productListStyles from "~/assets/css/product-list.css";
 import loadingStyles from "~/assets/css/loading.css";
 import selectStyles from "~/assets/css/select.css";
+import toyDetailsStyles from "~/assets/css/toy-details.css";
+
 import error404 from "~/assets/images/error.png";
 import Loading from "./shared/components/loading";
+import { Provider } from "react-redux";
+import { store } from "./shared/store";
 
 export const meta: MetaFunction = () => {
   return { title: "Remix Star Wars Toys" };
@@ -37,6 +41,7 @@ export const links = () => [
   { rel: 'stylesheet', href: productListStyles },
   { rel: 'stylesheet', href: loadingStyles },
   { rel: 'stylesheet', href: selectStyles },
+  { rel: 'stylesheet', href: toyDetailsStyles },
   { rel: 'preconnect', href: "https://fonts.googleapis.com" },
   { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100;0,700;1,400&display=swap' },
 ]
@@ -73,8 +78,10 @@ function Document({ children }: any) {
 export function Layout({ children }: any) {
   return (
     <>
+      <Provider store={store}>
         <Toolbar />
         {children}
+      </Provider>
     </>
   )
 }
@@ -89,7 +96,7 @@ export function ErrorBoundary({ error }: any) {
         <Loading isLoading={transition.state === 'loading' ? true : false} />
         <Cover
           image={error404}
-          title="Boundary Global Error"
+          title="Error Boundary - Root"
           titleColor="black"
           backgroundSize="contain"
           backgroundPosition="center"
@@ -110,6 +117,14 @@ export function CatchBoundary() {
   return (
     <Document>
       <Layout>
+        <Cover
+          image={error404}
+          title="Catch Boundary Error - Root"
+          titleColor="black"
+          backgroundSize="contain"
+          backgroundPosition="center"
+          backgroundColor="#f1f1f1"
+        />
         <div className="responsive-container">
           <div>
             ERROR: {caught.statusText} {caught.status}

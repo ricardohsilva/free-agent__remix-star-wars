@@ -40,8 +40,15 @@
 .product-card--name,
 .product-card--price {
     text-align: center;
-    margin: 1rem;
+    margin: 0.5rem;
+    color: #000;
+    transition: 0.25s;
 }
+.product-card--name:hover{
+    color: #11468f;
+}
+
+
 
 .product-card--price {
     color: #000;

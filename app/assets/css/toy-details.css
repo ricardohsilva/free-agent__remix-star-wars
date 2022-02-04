@@ -1,0 +1,60 @@
+.toy-details {
+    display: flex;
+    justify-content: space-between;
+    height: 85vh;
+}
+
+.toy-details--img-wrapper {
+    flex: 3;
+    display: inherit;
+    flex-direction: column;
+}
+
+.toy-details--img-wrapper--inner {
+    display: inherit;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+.toy-details--img-wrapper--inner--thumb {
+    height: 160px;
+    width: 160px;
+    max-width: 25vw;
+    max-height: 25vw;
+    border-radius: 10px;
+    padding: 0.5rem;
+}
+
+.toy-details--image {
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: 0.75s;
+}
+
+.toy-details--product-details {
+    flex: 1;
+    align-items: center;
+    display: inherit;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.toy-details--product-details--text {
+    text-align: center;
+}
+
+.toy-details--divider {
+    height: 1px;
+    background-color: #11468f;
+    width: 100%;
+}
+
+@media (max-width: 960px) {
+    .toy-details {
+        flex-direction: column;
+    }
+}

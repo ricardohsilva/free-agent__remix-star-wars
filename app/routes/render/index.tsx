@@ -87,7 +87,7 @@ export default function Index() {
               options={[{ name: 'Price (Low to High)', value: 'asc' }, { name: 'Price (High to Low)', value: 'desc' }]}
             />
           </div>
-          <ProductList products={data.toys} />
+          <ProductList toys={data.toys} />
         </div>
       </div>
     </>
