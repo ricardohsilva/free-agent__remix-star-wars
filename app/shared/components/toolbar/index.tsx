@@ -3,11 +3,17 @@ import logo from '~/assets/images/logo.png';
 import cartSvg from '~/assets/svg/cart.svg';
 import searchSvg from '~/assets/svg/search.svg';
 import { selectCart } from '~/shared/store/cart/cart.slice';
-import { useAppSelector } from '~/shared/store/hooks';
+import { useAppDispatch, useAppSelector } from '~/shared/store/hooks';
+import { openCloseSearch } from '~/shared/store/search/search.slice';
 
 export default function Toolbar() {
     // Subscribe to Store Cart.
     const { cart } = useAppSelector(selectCart);
+    const dispatch = useAppDispatch();
+
+    const handleSearch = () => {
+        dispatch(openCloseSearch(true));
+    }
 
     return (
         <>
@@ -99,7 +105,7 @@ export default function Toolbar() {
                     </div>
 
                     <div className="toolbar--svg-wrapper">
-                        <img src={searchSvg} alt="search" className="toolbar--svg-wrapper--search pointer" />
+                        <img onClick={handleSearch} src={searchSvg} alt="search" className="toolbar--svg-wrapper--search pointer" />
                         <div className='toolbar--relative toolbar--svg-wrapper--inner'>
                             <img src={cartSvg} alt="cart" className="toolbar--svg-wrapper--cart pointer" />
                             {cart.length > 0 &&

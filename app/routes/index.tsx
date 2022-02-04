@@ -51,7 +51,7 @@ export const loader: LoaderFunction = async ({ request }) => {
         count: await db.toy.count()
       }
       resolve(data)
-    }, 2000)
+    }, 0)
   })
   return json(data);
 }

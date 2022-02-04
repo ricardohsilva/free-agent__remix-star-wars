@@ -16,6 +16,7 @@ import { Provider } from "react-redux";
 import Cover from "./shared/components/cover";
 import Toolbar from "./shared/components/toolbar";
 import Loading from "./shared/components/loading";
+import Search from "./shared/components/search";
 
 import globalStyles from "~/assets/css/global.css";
 import toolbarStyles from "~/assets/css/toolbar.css";
@@ -28,6 +29,7 @@ import selectStyles from "~/assets/css/select.css";
 import toyDetailsStyles from "~/assets/css/toy-details.css";
 import breadcrumbStyles from "~/assets/css/breadcrumb.css";
 import promoStyles from "~/assets/css/promo.css";
+import searchStyles from "~/assets/css/search.css";
 import error404 from "~/assets/images/error.png";
 
 export const meta: MetaFunction = () => {
@@ -46,6 +48,7 @@ export const links = () => [
   { rel: 'stylesheet', href: toyDetailsStyles },
   { rel: 'stylesheet', href: breadcrumbStyles },
   { rel: 'stylesheet', href: promoStyles },
+  { rel: 'stylesheet', href: searchStyles },
   { rel: 'preconnect', href: "https://fonts.googleapis.com" },
   { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100;0,700;1,400&display=swap' },
 ]
@@ -84,6 +87,7 @@ export function Layout({ children }: any) {
     <>
       <Provider store={store}>
         <Toolbar />
+        <Search />
         {children}
       </Provider>
     </>
