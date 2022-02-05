@@ -2,10 +2,9 @@ import { Link, Outlet } from "remix";
 
 
 /* 
-  Breadcrumb 
+  Remix useMatches handlers 
 */
 export const handle = {
-  
   breadcrumb: () => {
     return (
       <>

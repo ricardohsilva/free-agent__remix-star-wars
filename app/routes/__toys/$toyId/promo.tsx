@@ -41,8 +41,9 @@ export default function Promo() {
     return (
         <div className="promo">
             <div className='promo--image' style={{ backgroundImage: `url(${promoGif})` }}>
-                <p className='promo--image--text'><b>You have an Awesome Deal for this Product!</b></p>
-                <p className='promo--image--text'><b>15% Off!!</b></p>
+                <div className='promo--image--text'>
+                    <p>15% Off!!</p>
+                </div>
             </div>
         </div>
     );

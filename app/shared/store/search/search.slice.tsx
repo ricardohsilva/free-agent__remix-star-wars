@@ -24,13 +24,13 @@ export const searchSlice = createSlice({
     name: 'search',
     initialState,
     reducers: {
-        openCloseSearch: (state, action: PayloadAction<boolean>) => {
+        shouldOpenSearch: (state, action: PayloadAction<boolean>) => {
             state.isOpened = action.payload
         }
     }
 });
 
 // Action creators are generated for each case reducer function
-export const { openCloseSearch } = searchSlice.actions
+export const { shouldOpenSearch } = searchSlice.actions
 
 export default searchSlice.reducer

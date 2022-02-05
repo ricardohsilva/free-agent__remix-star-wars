@@ -6,7 +6,8 @@ import {
   useLoaderData,
   useMatches,
   useNavigate,
-  useParams,
+  useNavigationType,
+  useResolvedPath,
   useTransition
 } from "remix";
 import Button from "~/shared/components/button";
@@ -21,6 +22,7 @@ import { useAppDispatch } from "~/shared/store/hooks";
   Remix Loader
 */
 export let loader: LoaderFunction = async ({ params }) => {
+  console.log('Toy id')
   const toyIdParam: string | undefined = params.toyId;
   let toy;
   if (toyIdParam) {
@@ -49,14 +51,14 @@ export let loader: LoaderFunction = async ({ params }) => {
 };
 
 /* 
-  Remix Breadcrumb
+  Remix useMatches handlers
 */
 export const handle = {
-  breadcrumb: () => {
+  breadcrumb: (data: IToy) => {
     return (
       <>
         <div className="breadcrumb--wrapper--separator"></div>
-        <div className="breadcrumb--wrapper--link"><p className="sm">Product Details</p></div>
+        <div className="breadcrumb--wrapper--link"><p className="sm">{data.name}</p></div>
       </>
     )
   }
@@ -67,17 +69,20 @@ export const handle = {
 */
 export default function ToyDetails() {
   const matches = useMatches();
-  const toy = useLoaderData<IToy>();
+  const toy = useLoaderData<IToy>()
   const transition = useTransition();
   const [selectedImage, setSelectedImage] = useState<string>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const navigationType = useNavigationType();
+  
+
 
   useEffect(() => {
-    if (!selectedImage && toy) {
+    if (!selectedImage && toy || navigationType === 'REPLACE') {
       setSelectedImage(toy.images[0].imageSrc);
     }
-  }, [toy]);
+  }, [toy, navigationType]);
 
   const getSelectedItem = (itemSrc: string): string => {
     if (itemSrc === selectedImage) {
@@ -100,11 +105,11 @@ export default function ToyDetails() {
                   match.handle && match.handle.breadcrumb
               )
               // render breadcrumbs!
-              .map((match, index) => (
-                <div key={index} className="breadcrumb--wrapper">
-                  {match.handle.breadcrumb(match)}
+              .map((match, index) => {
+                return <div key={index} className="breadcrumb--wrapper">
+                  {match.handle.breadcrumb(match.data)}
                 </div>
-              ))}
+              })}
           </div>
 
         </div>

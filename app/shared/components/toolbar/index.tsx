@@ -4,7 +4,7 @@ import cartSvg from '~/assets/svg/cart.svg';
 import searchSvg from '~/assets/svg/search.svg';
 import { selectCart } from '~/shared/store/cart/cart.slice';
 import { useAppDispatch, useAppSelector } from '~/shared/store/hooks';
-import { openCloseSearch } from '~/shared/store/search/search.slice';
+import { shouldOpenSearch } from '~/shared/store/search/search.slice';
 
 export default function Toolbar() {
     // Subscribe to Store Cart.
@@ -12,7 +12,7 @@ export default function Toolbar() {
     const dispatch = useAppDispatch();
 
     const handleSearch = () => {
-        dispatch(openCloseSearch(true));
+        dispatch(shouldOpenSearch(true));
     }
 
     return (

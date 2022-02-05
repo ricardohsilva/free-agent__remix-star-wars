@@ -1,5 +1,5 @@
 .promo {
-    height: 80%;
+    height: 30%;
     margin-top: 1rem;
     width: 100%;
     display: flex;
@@ -11,7 +11,6 @@
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    width: inherit;
     width: inherit;
     height: 100%;
     border-radius: 8px;
@@ -30,7 +29,21 @@
     background-color: #f76e11;
 }
 
-.promo--image--text,
+.promo--image--text {
+    position: absolute;
+    left: -40px;
+    bottom: -40px;
+    color: #000;
+    background-color: white;
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0.313em 0.938em rgb(0 0 0 / 50%);
+}
+
 .promo--image--text--crash {
     padding: 2rem 1rem;
     text-align: center;
@@ -39,12 +52,12 @@
     color: white;
 }
 
-.promo--image--text {
-    color: #f76e11;
-}
-
 @media (max-width: 960px) {
     .promo {
         height: 400px;
+    }
+
+    .promo--image--text {
+        left: 0;
     }
 }

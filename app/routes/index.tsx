@@ -1,4 +1,4 @@
-import { json, Link, LoaderFunction, useLoaderData, useMatches, useSubmit, useTransition } from "remix";
+import { json, Link, LoaderFunction, useLoaderData, useSubmit, useTransition } from "remix";
 
 import Cover from "~/shared/components/cover";
 import ProductList from "~/shared/components/product-list";
@@ -9,14 +9,8 @@ import { db } from "~/shared/services/db.server";
 
 import homeStyles from "~/assets/css/home.css";
 import coverGif from '~/assets/images/darth-vader-cover.gif';
+import { IHome } from "~/shared/interfaces/home.interface";
 
-/* 
-  Data Interface 
-*/
-interface IData {
-  toys: IToy[]
-  count: number
-}
 
 /* 
   Remix Styles for this Page 
@@ -36,23 +30,24 @@ export function links() {
 export const loader: LoaderFunction = async ({ request }) => {
   let url = new URL(request.url);
   const sortDirection = url.searchParams.get('sortDirection');
+  const name = url.searchParams.get('name');
 
   /* Making the response slowly with Timeout */
-  const data = await new Promise(async (resolve) => {
-    setTimeout(async () => {
-      const data = {
-        toys: await db.toy.findMany({
-          take: 30,
-          orderBy: { price: sortDirection === 'desc' || sortDirection === 'asc' ? sortDirection : 'desc' },
-          include: {
-            images: true,
-          }
-        }),
-        count: await db.toy.count()
+  const data = {
+    toys: await db.toy.findMany({
+      where: {
+        name: {
+          contains: name ? name : ''
+        }
+      },
+      take: 100,
+      orderBy: { price: sortDirection === 'desc' || sortDirection === 'asc' ? sortDirection : 'desc' },
+      include: {
+        images: true,
       }
-      resolve(data)
-    }, 0)
-  })
+    }),
+    count: await db.toy.count()
+  }
   return json(data);
 }
 
@@ -67,9 +62,10 @@ export const handle = {
   Component 
 */
 export default function Home() {
-  const data = useLoaderData<IData>();
+  const data = useLoaderData<IHome>();
   const submit = useSubmit();
   const transition = useTransition();
+
   const onSortDirectionSelect = (value: string) => {
     submit({ sortDirection: value }, { replace: true });
   }
