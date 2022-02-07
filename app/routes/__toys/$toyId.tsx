@@ -72,8 +72,6 @@ export const action: ActionFunction = async ({ request, params }) => {
 
     await db.comment.create({ data: data })
   }
-  console.log(url)
-
   return redirect(`/${toyIdParam}/promo`);
 }
 
@@ -161,9 +159,9 @@ export default function ToyDetails() {
             <div className="toy-details--divider"></div>
             <h3>${toy.price}.00</h3>
             <Button label="Add to Cart" callback={() => dispatch(addToCart(toy))} />
-            <Button label="Promo" callback={() => navigate(`/${toy.id}/promo`)} />
             <Outlet />
             <div className="toy-details--product-details--comments">
+              <h2>Comments</h2>
               {toy.comments?.map((item, index) =>
                 <div className="toy-details--product-details--comments--wrapper"  key={index}>
                   <p style={{textAlign:"center"}}>{item.comment}</p></div>
@@ -174,8 +172,9 @@ export default function ToyDetails() {
 
 
 
-        <Form method="post" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', margin: '1rem' }}>
-          <div style={{display:'inherit', justifyContent:'center'}}>
+        <Form method="post" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '1rem' }}>
+          <h2>Create a Comment to get a Deal</h2>
+          <div style={{display:'inherit', justifyContent:'center', marginBottom:'1rem'}}>
             <input name="comment" placeholder="Comment..." />
           </div>
           <Button label={'Create a new Comment'} />
