@@ -7,7 +7,8 @@ import {
   ScrollRestoration,
   useCatch,
   MetaFunction,
-  useTransition
+  useTransition,
+  LoaderFunction
 } from "remix";
 
 import { store } from "./shared/store";
@@ -31,6 +32,7 @@ import breadcrumbStyles from "~/assets/css/breadcrumb.css";
 import promoStyles from "~/assets/css/promo.css";
 import searchStyles from "~/assets/css/search.css";
 import error404 from "~/assets/images/error.png";
+import { getToys } from "./shared/services/toy.service";
 
 export const meta: MetaFunction = () => {
   return { title: "Remix Star Wars Toys" };
@@ -51,7 +53,7 @@ export const links = () => [
   { rel: 'stylesheet', href: searchStyles },
   { rel: 'preconnect', href: "https://fonts.googleapis.com" },
   { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100;0,700;1,400&display=swap' },
-]
+];
 
 export default function App() {
   return (
@@ -111,8 +113,10 @@ export function ErrorBoundary({ error }: any) {
           backgroundColor="#f1f1f1"
         />
         <div className="responsive-container">
-          <h1>Something went wrong :(</h1>
-          <p>{error.message}</p>
+          <div className="error">
+            <h2>Something went wrong :(</h2>
+            <p>{error.message}</p>
+          </div>
         </div>
       </Layout>
     </Document>
@@ -122,9 +126,11 @@ export function ErrorBoundary({ error }: any) {
 // General Status Errors
 export function CatchBoundary() {
   const caught = useCatch();
+  const transition = useTransition();
   return (
     <Document>
       <Layout>
+        <Loading isLoading={transition.state === 'loading' ? true : false} />
         <Cover
           image={error404}
           title="Catch Boundary Error - Root"
@@ -134,10 +140,11 @@ export function CatchBoundary() {
           backgroundColor="#f1f1f1"
         />
         <div className="responsive-container">
-          <div>
-            ERROR: {caught.statusText} {caught.status}
+          <div className="error">
+            <h2>ERROR: {caught.statusText} {caught.status}</h2>
+            <p>{caught.data.message}</p>
           </div>
-          <div>{caught.data.message}</div>
+
         </div>
       </Layout>
     </Document>

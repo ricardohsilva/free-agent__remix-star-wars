@@ -1,14 +1,22 @@
-import { json, Link, LoaderFunction, useLoaderData, useSubmit, useTransition } from "remix";
+import {
+  Link,
+  LoaderFunction,
+  Outlet,
+  useLoaderData,
+  useParams,
+  useSearchParams,
+  useSubmit,
+  useTransition
+} from "remix";
 
 import Cover from "~/shared/components/cover";
 import ProductList from "~/shared/components/product-list";
 import Loading from "~/shared/components/loading";
 import Select from "~/shared/components/select";
-import { IToy } from "~/shared/interfaces/toy.interface";
-import { db } from "~/shared/services/db.server";
 
 import homeStyles from "~/assets/css/home.css";
 import coverGif from '~/assets/images/darth-vader-cover.gif';
+import { getToys } from "~/shared/services/toy.service";
 import { IHome } from "~/shared/interfaces/home.interface";
 
 
@@ -24,33 +32,6 @@ export function links() {
   ];
 }
 
-/* 
-  Remix Loader Data 
-*/
-export const loader: LoaderFunction = async ({ request }) => {
-  let url = new URL(request.url);
-  const sortDirection = url.searchParams.get('sortDirection');
-  const name = url.searchParams.get('name');
-
-  /* Making the response slowly with Timeout */
-  const data = {
-    toys: await db.toy.findMany({
-      where: {
-        name: {
-          contains: name ? name : ''
-        }
-      },
-      take: 100,
-      orderBy: { price: sortDirection === 'desc' || sortDirection === 'asc' ? sortDirection : 'desc' },
-      include: {
-        images: true,
-      }
-    }),
-    count: await db.toy.count()
-  }
-  return json(data);
-}
-
 /*
   Breadcrumb
 */
@@ -59,17 +40,24 @@ export const handle = {
 };
 
 /* 
+  Remix Loader Data 
+*/
+export const loader: LoaderFunction = async ({ request }) => {
+  console.log('-------------------------------------------------- LOADING INDEX --------------------------------------------------')
+  let url = new URL(request.url);
+  const sortDirection = url.searchParams.get('sortDirection');
+  const data = await getToys(sortDirection);
+  return data;
+}
+
+/* 
   Component 
 */
 export default function Home() {
   const data = useLoaderData<IHome>();
   const submit = useSubmit();
   const transition = useTransition();
-
-  const onSortDirectionSelect = (value: string) => {
-    submit({ sortDirection: value }, { replace: true });
-  }
-
+  
   return (
     <>
       <Loading isLoading={transition.state === 'submitting' ? true : false} />
@@ -86,11 +74,13 @@ export default function Home() {
             <p className="sm">{data.count} Total Products</p>
             <Select
               label="Sort By"
-              onSelect={(value) => onSortDirectionSelect(value.toString())}
+              onSelect={(value) => submit({ sortDirection: value.toString() }, { action: '/' })}
               options={[{ name: 'Price (Low to High)', value: 'asc' }, { name: 'Price (High to Low)', value: 'desc' }]}
             />
           </div>
+
           <ProductList toys={data.toys} />
+          <Outlet />
         </div>
       </div>
     </>

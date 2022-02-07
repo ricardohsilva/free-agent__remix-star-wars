@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { db } from '~/shared/services/db.server';
+import { db } from '~/shared/services/db.service';
 import { ActionFunction, Form, LoaderFunction, useFetcher, useLoaderData, useMatches, useNavigate, useSubmit } from 'remix';
 
 import { useAppDispatch, useAppSelector } from '~/shared/store/hooks';

@@ -5,16 +5,15 @@ body {
     overflow-x: hidden;
 }
 
-.spacer-8{
+.spacer-8 {
     margin: 8px 0;
 }
 
-
-.spacer-16{
+.spacer-16 {
     margin: 16px 0;
 }
 
-.spacer-64{
+.spacer-64 {
     margin: 64px 0;
 }
 
@@ -32,4 +31,11 @@ body {
 
 .pointer {
     cursor: pointer;
+}
+
+.error {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
 }

@@ -7,13 +7,13 @@ import {
   useMatches,
   useNavigate,
   useNavigationType,
-  useResolvedPath,
-  useTransition
+  useTransition,
 } from "remix";
 import Button from "~/shared/components/button";
 import Loading from "~/shared/components/loading";
+import Select from "~/shared/components/select";
 import { IToy } from "~/shared/interfaces/toy.interface";
-import { db } from "~/shared/services/db.server";
+import { db } from "~/shared/services/db.service";
 import { addToCart } from "~/shared/store/cart/cart.slice";
 import { useAppDispatch } from "~/shared/store/hooks";
 
@@ -22,7 +22,6 @@ import { useAppDispatch } from "~/shared/store/hooks";
   Remix Loader
 */
 export let loader: LoaderFunction = async ({ params }) => {
-  console.log('Toy id')
   const toyIdParam: string | undefined = params.toyId;
   let toy;
   if (toyIdParam) {
@@ -40,7 +39,7 @@ export let loader: LoaderFunction = async ({ params }) => {
 
     if (!toy) {
       throw json(
-        { message: 'Product does not exist' },
+        { message: 'Something went wrong :(' },
         {
           status: 404
         }
@@ -75,7 +74,7 @@ export default function ToyDetails() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const navigationType = useNavigationType();
-  
+  console.log(matches)
 
 
   useEffect(() => {
@@ -134,7 +133,16 @@ export default function ToyDetails() {
             <h3>${toy.price}.00</h3>
             <Button label="Add to Cart" callback={() => dispatch(addToCart(toy))} />
             <Button label="Promo" callback={() => navigate(`/${toy.id}/promo`)} />
+            <div>
+              You might want to see:
+              {/* <div>
+                {matches[1].data.toys.map((product: IToy) => {
+                  return <div key={product.id}>{product.name}</div>
+                })}
+              </div> */}
+            </div>
             <Outlet />
+            
           </div>
         </div>
       </div>
