@@ -53,6 +53,22 @@
     width: 100%;
 }
 
+.toy-details--product-details--comments {
+    max-height: 100%;
+    width: 100%;
+    margin: 1rem 0;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.toy-details--product-details--comments--wrapper {
+    border: solid 1px #eeeeee;
+    border-radius: 1rem;
+    padding: 0.5rem;
+}
+
 @media (max-width: 960px) {
     .toy-details {
         flex-direction: column;

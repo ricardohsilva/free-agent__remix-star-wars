@@ -28,7 +28,7 @@ export default function ProductCard({ toy }: IProps) {
     }, [isHovering]);
 
     const changeBackgroundImage = () => {
-        if (toy.images.length === currentImageRef.current + 1) {
+        if (toy.images?.length === currentImageRef.current + 1) {
             currentImageRef.current = 0;
         } else {
             currentImageRef.current += 1;
@@ -44,16 +44,18 @@ export default function ProductCard({ toy }: IProps) {
         <div onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="product-card">
 
             <div className="product-card--safe-area"></div>
-
-            <div className="product-card--image" style={{ backgroundImage: `url(${toy.images[currentImageIndex].imageSrc})` }}></div>
-            
-            <Link to={`/${toy.id}`} prefetch='none' style={{textDecoration:'none'}} className='product-card--name'>
+            {toy && toy.images &&
+                <div className="product-card--image" style={{ backgroundImage: `url(${toy.images[currentImageIndex].imageSrc})` }}></div>
+            }
+            <Link to={`/${toy.id}`} prefetch='none' style={{ textDecoration: 'none' }} className='product-card--name'>
                 <p>{toy.name}</p>
             </Link>
             <p className="product-card--price">${toy.price}.00</p>
 
             {isHovering &&
-                <Button label="Add to Cart" callback={() => addToItem()} />
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Button label="Add to Cart" callback={() => addToItem()} />
+                </div>
             }
         </div>
     )

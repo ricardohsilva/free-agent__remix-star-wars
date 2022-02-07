@@ -33,7 +33,7 @@ export default function Toolbar() {
 
                         <div className='toolbar--relative toolbar--list-items--hide-mobile'>
                             <NavLink
-                                to="/home-no-delay"
+                                to="/not-found"
                                 className='toolbar--list-items--link'
                                 style={({ isActive }) => isActive ?
                                     { backgroundColor: 'black', color: 'white' }
@@ -45,6 +45,25 @@ export default function Toolbar() {
                             <div className='toolbar--hint'>
                                 <p className='xs'><b>Sample of Root Error</b></p>
                                 <p className='xs'>Catch from ./root.tsx will be called</p>
+                            </div>
+                        </div>
+
+                        <div className='toolbar--relative toolbar--list-items--hide-mobile'>
+                            <NavLink
+                                to="/home-prefetch"
+                                prefetch='intent'
+                                className='toolbar--list-items--link'
+                                style={({ isActive }) => isActive ?
+                                    { backgroundColor: 'black', color: 'white' }
+                                    :
+                                    { backgroundColor: 'transparent', color: 'black' }}
+                            >
+                                <p className="sm">Home Prefetch</p>
+                            </NavLink>
+                            <div className='toolbar--hint'>
+                                <p className='xs'><b>Pre Fetch Data on Hover </b>prefetch='intent'</p>
+                                <p className='xs'>It will preload data from this page as soon as the mouse is over</p>
+                                <p className='xs'><b>Backend with 2s of delay!</b></p>
                             </div>
                         </div>
                     </div>

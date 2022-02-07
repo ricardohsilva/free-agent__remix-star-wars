@@ -1,10 +1,7 @@
 import {
-  Link,
   LoaderFunction,
   Outlet,
   useLoaderData,
-  useParams,
-  useSearchParams,
   useSubmit,
   useTransition
 } from "remix";
@@ -32,21 +29,14 @@ export function links() {
   ];
 }
 
-/*
-  Breadcrumb
-*/
-export const handle = {
-  breadcrumb: () => <Link to="/">Some Route</Link>
-};
-
 /* 
   Remix Loader Data 
 */
 export const loader: LoaderFunction = async ({ request }) => {
-  console.log('-------------------------------------------------- LOADING INDEX --------------------------------------------------')
   let url = new URL(request.url);
   const sortDirection = url.searchParams.get('sortDirection');
-  const data = await getToys(sortDirection);
+  const name = url.searchParams.get('name');
+  const data = await getToys(sortDirection, name, 0);
   return data;
 }
 
@@ -57,10 +47,11 @@ export default function Home() {
   const data = useLoaderData<IHome>();
   const submit = useSubmit();
   const transition = useTransition();
+  const isLoading = transition.state === 'submitting' || transition.state === 'loading' ? true : false;
   
   return (
     <>
-      <Loading isLoading={transition.state === 'submitting' ? true : false} />
+      <Loading isLoading={isLoading} />
       <div className="home">
         <Cover
           image={coverGif}
@@ -78,7 +69,6 @@ export default function Home() {
               options={[{ name: 'Price (Low to High)', value: 'asc' }, { name: 'Price (High to Low)', value: 'desc' }]}
             />
           </div>
-
           <ProductList toys={data.toys} />
           <Outlet />
         </div>

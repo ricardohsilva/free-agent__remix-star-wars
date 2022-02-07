@@ -7,9 +7,9 @@ import crashGif from '~/assets/images/crash.gif';
 */
 export const loader: LoaderFunction = async ({ params }) => {
     const toyIdParam: string | undefined = params.toyId;
-
+    console.log(toyIdParam)
     // Force Error if Toy Id is 1.
-    if (!toyIdParam || toyIdParam === '1') {
+    if (!toyIdParam || toyIdParam === '63') {
         throw json(
             { message: 'Something went wrong! :(' },
             { status: 500 }

@@ -9,14 +9,6 @@ import { IToy } from '~/shared/interfaces/toy.interface';
 import SearchItem from './search-item';
 import closeSvg from '~/assets/svg/close.svg';
 
-export let action: ActionFunction = async ({ params }) => {
-    console.log('Action Search?')
-}
-
-export const loader: LoaderFunction = async ({ request }) => {
-    console.log('Loader search')
-}
-
 export default function Search() {
     const searchRef = useRef<HTMLDivElement>(null);
     const dispatch = useAppDispatch();

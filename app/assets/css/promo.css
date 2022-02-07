@@ -1,5 +1,5 @@
 .promo {
-    height: 30%;
+    min-height: 12rem;
     margin-top: 1rem;
     width: 100%;
     display: flex;

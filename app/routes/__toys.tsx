@@ -8,12 +8,11 @@ export const handle = {
   breadcrumb: () => {
     return (
       <>
-        <Link className="breadcrumb--wrapper--link" to={`/`}><p  className="sm">Home</p></Link>
+        <Link className="breadcrumb--wrapper--link" to={`/`}><p className="sm">Home</p></Link>
       </>
-      )
+    )
   }
 };
-
 
 /* 
   Component 

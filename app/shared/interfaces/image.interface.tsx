@@ -1,5 +1,5 @@
 export interface IImage {
-    id: number;
+    id?: number;
     toyId: number;
     imageSrc: string;
     createdAt: Date;

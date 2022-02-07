@@ -1,3 +1,8 @@
+
+npx prisma db push
+npx prisma db seed
+
+
 # Welcome to Remix!
 
 - [Remix Docs](https://remix.run/docs)
