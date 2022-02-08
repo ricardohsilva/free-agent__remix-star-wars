@@ -81,3 +81,9 @@
     align-items: center;
     margin: 1rem;
 }
+
+.toy-details--form--inner {
+    display: inherit;
+    justify-content: center;
+    margin-bottom: 1rem;
+}

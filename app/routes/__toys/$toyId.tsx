@@ -57,7 +57,6 @@ export let loader: LoaderFunction = async ({ params }) => {
   Remix Actions
 */
 export const action: ActionFunction = async ({ request, params }) => {
-  let url = new URL(request.url);
   const form = await request.formData();
   const toyIdParam: string | undefined = params.toyId;
   const comment = form.get("comment");
@@ -99,7 +98,6 @@ export default function ToyDetails() {
   const transition = useTransition();
   const [selectedImage, setSelectedImage] = useState<string>();
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const navigationType = useNavigationType();
 
   useEffect(() => {
@@ -174,10 +172,10 @@ export default function ToyDetails() {
 
         <Form method="post" className="toy-details--form">
           <h2>Create a Comment to get a Deal</h2>
-          <div style={{display:'inherit', justifyContent:'center', marginBottom:'1rem'}}>
+          <div className="toy-details--form--inner">
             <input name="comment" placeholder="Comment..." />
           </div>
-          <Button label={'Create a new Comment'} />
+          <Button label={'Create a new Comment'} type="submit" />
         </Form>
       </div>
     </>
