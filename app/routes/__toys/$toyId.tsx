@@ -172,7 +172,7 @@ export default function ToyDetails() {
 
 
 
-        <Form method="post" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '1rem' }}>
+        <Form method="post" className="toy-details--form">
           <h2>Create a Comment to get a Deal</h2>
           <div style={{display:'inherit', justifyContent:'center', marginBottom:'1rem'}}>
             <input name="comment" placeholder="Comment..." />
