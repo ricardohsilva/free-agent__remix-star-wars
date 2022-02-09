@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { db } from '~/shared/services/db.service';
-import { ActionFunction, Form, LoaderFunction, useFetcher, useLoaderData, useMatches, useNavigate, useSubmit } from 'remix';
+import { useEffect, useRef } from 'react';
+import { Form, useFetcher, useNavigate } from 'remix';
 
 import { useAppDispatch, useAppSelector } from '~/shared/store/hooks';
 import { shouldOpenSearch, selectSearch } from '~/shared/store/search/search.slice';
@@ -14,8 +13,6 @@ export default function Search() {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const fetcher = useFetcher();
-
-
 
     const onSearch = (value: string) => {
         fetcher.submit({ name: value }, { method: 'get', action: '/' });
