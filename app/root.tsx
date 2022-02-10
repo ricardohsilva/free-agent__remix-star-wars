@@ -8,7 +8,7 @@ import {
   useCatch,
   MetaFunction,
   useTransition,
-  LoaderFunction
+  HeadersFunction,
 } from "remix";
 
 import { store } from "./shared/store";
@@ -32,7 +32,13 @@ import breadcrumbStyles from "~/assets/css/breadcrumb.css";
 import promoStyles from "~/assets/css/promo.css";
 import searchStyles from "~/assets/css/search.css";
 import error404 from "~/assets/images/error.png";
-import { getToys } from "./shared/services/toy.service";
+
+export const headers: HeadersFunction = ({ loaderHeaders, parentHeaders }) => {
+  return {
+    "X-Stretchy-Pants": "its for fun",
+    "Cache-Control": "max-age=1, s-maxage=600 stale-while-revalidate=600"
+  };
+}
 
 export const meta: MetaFunction = () => {
   return { title: "Remix Star Wars Toys" };

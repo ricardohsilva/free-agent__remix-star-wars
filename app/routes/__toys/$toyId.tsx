@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import {
   ActionFunction,
   Form,
+  HeadersFunction,
   json,
   LoaderFunction,
   Outlet,
   redirect,
   useLoaderData,
   useMatches,
-  useNavigate,
   useNavigationType,
   useTransition,
 } from "remix";
@@ -21,10 +21,18 @@ import { addToCart } from "~/shared/store/cart/cart.slice";
 import { useAppDispatch } from "~/shared/store/hooks";
 
 
+export const headers: HeadersFunction = ({ loaderHeaders, parentHeaders }) => {
+  console.log(loaderHeaders)
+  return {
+    "X-Stretchy-Pants": "its for fun",
+    "Cache-Control": "max-age=1, s-maxage=600 stale-while-revalidate=600"
+  };
+}
+
 /*
   Remix Loader
 */
-export let loader: LoaderFunction = async ({ params }) => {
+export let loader: LoaderFunction = async ({ params, context }) => {
   const toyIdParam: string | undefined = params.toyId;
   let toy;
   if (toyIdParam) {
@@ -49,7 +57,11 @@ export let loader: LoaderFunction = async ({ params }) => {
         }
       )
     }
-    return json(toy);
+    return json(toy,
+      {
+        headers: { "Cache-Control": "max-age=1, s-maxage=1 stale-while-revalidate=200" }
+      }
+    );
   }
 };
 
@@ -71,7 +83,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
     await db.comment.create({ data: data })
   }
-  return redirect(`/${toyIdParam}/promo`);
+  return redirect(`/${toyIdParam}/promo`, { headers: { "Cache-Control": "max-age=1, s-maxage=600 stale-while-revalidate=600" } });
 }
 
 
@@ -99,6 +111,7 @@ export default function ToyDetails() {
   const [selectedImage, setSelectedImage] = useState<string>();
   const dispatch = useAppDispatch();
   const navigationType = useNavigationType();
+
 
   useEffect(() => {
     if (!selectedImage || navigationType === 'REPLACE') {
@@ -130,9 +143,12 @@ export default function ToyDetails() {
               )
               // render breadcrumbs!
               .map((match, index) => {
-                return <div key={index} className="breadcrumb--wrapper">
-                  {match.handle.breadcrumb(match.data)}
-                </div>
+                // debugger
+                return (
+                  <div key={index} className="breadcrumb--wrapper">
+                    {match.handle.breadcrumb(match.data)}
+                  </div>
+                )
               })}
           </div>
 
@@ -161,8 +177,8 @@ export default function ToyDetails() {
             <div className="toy-details--product-details--comments">
               <h2>Comments</h2>
               {toy.comments?.map((item, index) =>
-                <div className="toy-details--product-details--comments--wrapper"  key={index}>
-                  <p style={{textAlign:"center"}}>{item.comment}</p></div>
+                <div className="toy-details--product-details--comments--wrapper" key={index}>
+                  <p style={{ textAlign: "center" }}>{item.comment}</p></div>
               )}
             </div>
           </div>

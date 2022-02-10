@@ -54,6 +54,7 @@
 }
 
 .toy-details--product-details--comments {
+    height: 100%;
     max-height: 100%;
     width: 100%;
     margin: 1rem 0;
@@ -72,6 +73,9 @@
 @media (max-width: 960px) {
     .toy-details {
         flex-direction: column;
+    }
+    .toy-details--product-details{
+        max-height: 600px;
     }
 }
 

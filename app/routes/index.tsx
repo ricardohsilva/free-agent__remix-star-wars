@@ -1,4 +1,5 @@
 import {
+  json,
   LoaderFunction,
   Outlet,
   useLoaderData,
@@ -15,7 +16,6 @@ import homeStyles from "~/assets/css/home.css";
 import coverGif from '~/assets/images/darth-vader-cover.gif';
 import { getToys } from "~/shared/services/toy.service";
 import { IHome } from "~/shared/interfaces/home.interface";
-
 
 /* 
   Remix Styles for this Page 
@@ -37,7 +37,11 @@ export const loader: LoaderFunction = async ({ request }) => {
   const sortDirection = url.searchParams.get('sortDirection');
   const name = url.searchParams.get('name');
   const data = await getToys(sortDirection, name, 0);
-  return data;
+  return json(data,
+    {
+      headers: { "Cache-Control": "max-age=30, s-maxage=30 stale-while-revalidate=200" }
+    }
+  );
 }
 
 /* 
@@ -47,8 +51,8 @@ export default function Home() {
   const data = useLoaderData<IHome>();
   const submit = useSubmit();
   const transition = useTransition();
-  const isLoading = transition.state === 'submitting' || transition.state === 'loading' ? true : false;
-  
+  const isLoading = transition.state === 'loading' ? true : false;
+
   return (
     <>
       <Loading isLoading={isLoading} />
