@@ -19,15 +19,14 @@ import { IToy } from "~/shared/interfaces/toy.interface";
 import { db } from "~/shared/services/db.service";
 import { addToCart } from "~/shared/store/cart/cart.slice";
 import { useAppDispatch } from "~/shared/store/hooks";
+import toyDetailsStyles from "~/assets/css/toy-details.css";
 
-
-export const headers: HeadersFunction = ({ loaderHeaders, parentHeaders }) => {
-  console.log(loaderHeaders)
-  return {
-    "X-Stretchy-Pants": "its for fun",
-    "Cache-Control": "max-age=1, s-maxage=600 stale-while-revalidate=600"
-  };
-}
+/*
+  Remix Styles
+*/
+export const links = () => [
+  { rel: 'stylesheet', href: toyDetailsStyles }
+]
 
 /*
   Remix Loader
@@ -107,7 +106,6 @@ export const handle = {
 export default function ToyDetails() {
   const matches = useMatches();
   const toy = useLoaderData<IToy>()
-  const transition = useTransition();
   const [selectedImage, setSelectedImage] = useState<string>();
   const dispatch = useAppDispatch();
   const navigationType = useNavigationType();
@@ -130,7 +128,6 @@ export default function ToyDetails() {
   }
   return (
     <>
-      <Loading isLoading={transition.state === 'loading' ? true : false} />
       <div className="spacer-16"></div>
       <div className="responsive-container">
         <div style={{ margin: '1rem 0' }}>

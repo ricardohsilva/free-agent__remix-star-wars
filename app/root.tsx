@@ -27,16 +27,13 @@ import buttonStyles from "~/assets/css/button.css";
 import productListStyles from "~/assets/css/product-list.css";
 import loadingStyles from "~/assets/css/loading.css";
 import selectStyles from "~/assets/css/select.css";
-import toyDetailsStyles from "~/assets/css/toy-details.css";
 import breadcrumbStyles from "~/assets/css/breadcrumb.css";
-import promoStyles from "~/assets/css/promo.css";
 import searchStyles from "~/assets/css/search.css";
 import error404 from "~/assets/images/error.png";
 
 export const headers: HeadersFunction = ({ loaderHeaders, parentHeaders }) => {
   return {
-    "X-Stretchy-Pants": "its for fun",
-    "Cache-Control": "max-age=1, s-maxage=600 stale-while-revalidate=600"
+    "Cache-Control": "max-age=600, s-maxage=600 stale-while-revalidate=600"
   };
 }
 
@@ -45,7 +42,10 @@ export const meta: MetaFunction = () => {
 };
 
 export const links = () => [
+  // Global Styles
   { rel: 'stylesheet', href: globalStyles },
+
+  //Componnet Styles
   { rel: 'stylesheet', href: toolbarStyles },
   { rel: 'stylesheet', href: archivoFont },
   { rel: 'stylesheet', href: coverStyles },
@@ -53,9 +53,8 @@ export const links = () => [
   { rel: 'stylesheet', href: productListStyles },
   { rel: 'stylesheet', href: loadingStyles },
   { rel: 'stylesheet', href: selectStyles },
-  { rel: 'stylesheet', href: toyDetailsStyles },
+
   { rel: 'stylesheet', href: breadcrumbStyles },
-  { rel: 'stylesheet', href: promoStyles },
   { rel: 'stylesheet', href: searchStyles },
   { rel: 'preconnect', href: "https://fonts.googleapis.com" },
   { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100;0,700;1,400&display=swap' },
@@ -104,12 +103,9 @@ export function Layout({ children }: any) {
 
 // General Errors
 export function ErrorBoundary({ error }: any) {
-  const transition = useTransition();
-
   return (
     <Document>
       <Layout>
-        <Loading isLoading={transition.state === 'loading' ? true : false} />
         <Cover
           image={error404}
           title="Error Boundary - Root"
@@ -132,11 +128,9 @@ export function ErrorBoundary({ error }: any) {
 // General Status Errors
 export function CatchBoundary() {
   const caught = useCatch();
-  const transition = useTransition();
   return (
     <Document>
       <Layout>
-        <Loading isLoading={transition.state === 'loading' ? true : false} />
         <Cover
           image={error404}
           title="Catch Boundary Error - Root"

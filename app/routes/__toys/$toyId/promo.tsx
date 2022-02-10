@@ -1,7 +1,15 @@
 import { json, LoaderFunction, useCatch } from 'remix';
 import promoGif from '~/assets/images/promo.gif';
 import crashGif from '~/assets/images/crash.gif';
+import promoStyles from "~/assets/css/promo.css";
 
+
+/*
+  Remix Styles
+*/
+export const links = () => [
+    { rel: 'stylesheet', href: promoStyles },
+]
 /* 
   Remix Loader Data 
 */
