@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import {
   ActionFunction,
   Form,
-  HeadersFunction,
   json,
   LoaderFunction,
   Outlet,
@@ -10,10 +9,8 @@ import {
   useLoaderData,
   useMatches,
   useNavigationType,
-  useTransition,
 } from "remix";
 import Button from "~/shared/components/button";
-import Loading from "~/shared/components/loading";
 import { IComment } from "~/shared/interfaces/comment.interface";
 import { IToy } from "~/shared/interfaces/toy.interface";
 import { db } from "~/shared/services/db.service";

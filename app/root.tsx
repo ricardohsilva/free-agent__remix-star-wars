@@ -7,7 +7,6 @@ import {
   ScrollRestoration,
   useCatch,
   MetaFunction,
-  useTransition,
   HeadersFunction,
 } from "remix";
 
@@ -16,7 +15,6 @@ import { Provider } from "react-redux";
 
 import Cover from "./shared/components/cover";
 import Toolbar from "./shared/components/toolbar";
-import Loading from "./shared/components/loading";
 import Search from "./shared/components/search";
 
 import globalStyles from "~/assets/css/global.css";
@@ -30,12 +28,6 @@ import selectStyles from "~/assets/css/select.css";
 import breadcrumbStyles from "~/assets/css/breadcrumb.css";
 import searchStyles from "~/assets/css/search.css";
 import error404 from "~/assets/images/error.png";
-
-export const headers: HeadersFunction = ({ loaderHeaders, parentHeaders }) => {
-  return {
-    "Cache-Control": "max-age=600, s-maxage=600 stale-while-revalidate=600"
-  };
-}
 
 export const meta: MetaFunction = () => {
   return { title: "Remix Star Wars Toys" };

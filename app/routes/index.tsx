@@ -39,7 +39,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   const data = await getToys(sortDirection, name, 0);
   return json(data,
     {
-      headers: { "Cache-Control": "max-age=30, s-maxage=30 stale-while-revalidate=200" }
+      headers: { "Cache-Control": "max-age=300, s-maxage=300 stale-while-revalidate=300" }
     }
   );
 }
