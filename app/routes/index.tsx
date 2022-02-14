@@ -13,7 +13,7 @@ import Loading from "~/shared/components/loading";
 import Select from "~/shared/components/select";
 
 import homeStyles from "~/assets/css/home.css";
-import coverGif from '~/assets/images/darth-vader-cover.gif';
+import cover from '~/assets/images/cover.png';
 import { getToys } from "~/shared/services/toy.service";
 import { IHome } from "~/shared/interfaces/home.interface";
 
@@ -58,10 +58,11 @@ export default function Home() {
       <Loading isLoading={isLoading} />
       <div className="home">
         <Cover
-          image={coverGif}
+          image={cover}
           title="Star Wars Toys"
           titleColor="white"
           backgroundSize="cover"
+          backgroundPosition="center"
         />
         <div className="spacer-16"></div>
         <div className="responsive-container">
