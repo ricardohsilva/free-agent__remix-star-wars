@@ -4,12 +4,6 @@ import crashGif from '~/assets/images/crash.gif';
 import promoStyles from "~/assets/css/promo.css";
 
 
-export const headers: HeadersFunction = ({ loaderHeaders, parentHeaders }) => {
-    return {
-        "Cache-Control": "max-age=600, s-maxage=600 stale-while-revalidate=600"
-    };
-}
-
 /*
   Remix Styles
 */
